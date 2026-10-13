@@ -1,7 +1,5 @@
 name: Build APK
 on: push
-permissions:
-  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,9 +9,16 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: gradle/gradle-build-action@v2
-      - run: gradle assembleDebug --no-daemon
-      - uses: actions/upload-artifact@v4
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v3
         with:
-          name: SecureShare-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          gradle-version: 8.4
+      - name: Make gradlew executable
+        run: chmod +x gradlew || echo "no gradlew yet"
+      - name: Build APK
+        run: gradle assembleDebug --no-daemon
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Your-App-APK
+          path: app/build/outputs/apk/debug/*.apk
