@@ -1,0 +1,6 @@
+{
+  "name": "CipherDrop",
+  "description": "Instant WLAN file transfer with secure end-to-end ECDH key exchange and AES-256-GCM encryption.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
